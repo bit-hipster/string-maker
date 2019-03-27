@@ -19,13 +19,14 @@ pub.StringBuilder = function(str, strend) {
 
     priv.holdBuffer = [];
 
-    this.recycle = function (action) { //alias
+    this.recycle = function (action) {//alias
         this.release(action,true);
+        return this;
     };
 
     this.release = function(action, recycle){
-        if(!priv.hold) return this; //do nada
-        if(action[0].toLowerCase() === 'p'){//prepend
+        if(!priv.hold) return this;
+        if(action[0].toLowerCase() === 'p'){
             if(priv.postHold) priv.buffer.unshift(priv.postHold);
             for(var i = priv.holdBuffer.length; i--;){
                 priv.buffer.unshift(priv.holdBuffer[i]);
@@ -39,8 +40,6 @@ pub.StringBuilder = function(str, strend) {
 
             if(priv.postHold) priv.buffer.push(priv.postHold);
         }
-
-
         priv.length = priv.buffer.length + priv.preHold.length + priv.postHold.length;
         priv.holdBuffer = [];
         if(!recycle) {
@@ -48,15 +47,18 @@ pub.StringBuilder = function(str, strend) {
             priv.postHold = '';
             priv.hold = false;
         }
+
+        return this;
     };
 
-    this.flush = function(){ //reset holdBuffer to start over
-        if(!priv.hold) return this; //do nada
+    this.flush = function(){ //empty holdBuffer
+        if(!priv.hold) return this;
         else{
             if(priv.postHold) priv.postHold = ''; priv.preHold = '';
             priv.length -= priv.holdBuffer.join('').length;
             priv.holdBuffer = [];
         }
+        return this;
     };
 
     this.hold = function(str,strend){
@@ -67,6 +69,7 @@ pub.StringBuilder = function(str, strend) {
         }else {
             this.append(str);
         }
+        return this;
     };
 
     this.append = function(str) {
@@ -121,7 +124,7 @@ pub.StringBuilder = function(str, strend) {
         if (clear) priv.clear(keepPreEnd);
         else priv.length = rval.length;
 
-        //remove contents of hold buffer
+        //empty buffers
         priv.holdBuffer = [];
         priv.hold = false;
 
@@ -141,8 +144,10 @@ pub.StringBuilder = function(str, strend) {
             priv.end = "";
             priv.length = 0;
         }
+
+        return this;
     };
 
 };
 
-module.exports = pub.StringBuilder;
+module.exports = pub;

@@ -3,7 +3,27 @@ The String Builder Library for Node JS and Javascript
 
 # Usage
 ```
-//examples go here
 //index.js file is what is brought in by npm
 //strmaker.js is what you should include in your web project
+
+const { StringBuilder } = require('./index.js')
+
+let sb = new StringBuilder('first')
+
+let string =  sb.append('thing')
+                .append('to')
+                .append('write')
+                .prepend('The')
+                .hold('START ***','*** END')
+                .append('1')
+for(var i = 2; i <= 30; i++ ){
+  sb.append('.item')
+    .append(i)
+}
+
+sb.append('.item')
+  .release('a');
+
+console.log(string.toString(' '));
+
 ```
