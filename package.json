@@ -1,0 +1,16 @@
+{
+  "name": "string-maker",
+  "version": "1.0.0",
+  "description": "The stringbuilder for javasvript and node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "string builder",
+    "stringbuilder",
+    "string generator"
+  ],
+  "author": "bit-hipster",
+  "license": "ISC"
+}
