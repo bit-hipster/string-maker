@@ -8,22 +8,21 @@ The String Builder Library for Node JS and Javascript
 
 const { StringBuilder } = require('./index.js')
 
-let sb = new StringBuilder('first')
-
-let string =  sb.append('thing')
-                .append('to')
-                .append('write')
-                .prepend('The')
-                .hold('START ***','*** END')
-                .append('1')
+let sb = new StringBuilder('last')
+        .append('thing')
+        .append('to')
+        .append('write')
+        .prepend('The')
+        .hold('START ***','*** END')
+        .append('1')
 for(var i = 2; i <= 30; i++ ){
   sb.append('.item')
     .append(i)
 }
 
 sb.append('.item')
-  .release('a');
+  .release('prepend');
 
-console.log(string.toString(' '));
+console.log(sb.toString(' '));
 
 ```
